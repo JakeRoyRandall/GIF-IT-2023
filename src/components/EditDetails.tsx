@@ -6,12 +6,13 @@ type AppState = "error" | "loading" | "ready" | "details" | "processing" | "done
 
 type EditDetailsProps = {
   video: File,
+  setVideo: (file: File | null) => void
   appState: AppState,
   setAppState: (state: AppState) => void,
-  convert: (start: number, duration: number) => void
+  convert: (start: number, duration: number) => Promise<void>
 }
 
-export default function EditDetails({video}: EditDetailsProps) {
+export default function EditDetails({video, setVideo, appState, setAppState, convert}: EditDetailsProps) {
   // const [start, setStart] = useState(0)
   const [duration, setDuration] = useState(6)
   // const [end, setEnd] = useState(0)
@@ -37,13 +38,19 @@ export default function EditDetails({video}: EditDetailsProps) {
         />
       </div>
       <div id="SliderContainer" className="flex flex-col justify-around items-center w-100 h-20">
-          <Slider className="w-100 text-black"  dots={true} range min={0} max={duration} onChange={(e) => updateState(e)} allowCross={false} defaultValue={[0, 6]} step={0.01}/>
+          <Slider className="w-100 text-black" dots={true} range min={0} max={duration} onChange={(e) => updateState(e)} allowCross={false} defaultValue={[0, 6]} step={0.01}/>
             <h4>Start : {start} seconds &nbsp;&nbsp;&nbsp; Duration: {gifDur} seconds</h4>
       </div>
 
       <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20">
-          <button className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" onClick={() => {}}>START OVER</button>
-          <button className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" onClick={() => {}}>GIF-IT!</button>
+          <button className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" 
+                  onClick={() => {setVideo(null); setAppState("ready")}}>
+            START OVER
+          </button>
+          <button className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" 
+                  onClick={() => {convert(start, gifDur)}}>
+            GIF-IT!
+          </button>
       </div>
   </div>
   )

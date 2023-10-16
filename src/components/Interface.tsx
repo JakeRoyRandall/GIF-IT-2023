@@ -8,7 +8,7 @@ type AppState = "error" | "loading" | "ready" | "details" | "processing" | "done
 type InterfaceProps = {
   appState: AppState,
   setAppState: (state: AppState) => void,
-  convertToGif: (video: File, start: number, duration: number) => void,
+  convertToGif: (video: File, start: number, duration: number) => Promise<void>,
   gifUrl: string | null,
 }
 // Ignore props errors as I will eventually use them
@@ -16,9 +16,11 @@ type InterfaceProps = {
 export default function Interface({appState, setAppState, convertToGif, gifUrl}: InterfaceProps) {
   const [video, setVideo] = useState<File | null>(null)
   
-  const convert = (start: number, duration: number) => {
+  const convert = async (start: number, duration: number) => {
+    console.log("converting")
     if (video) {
-      convertToGif(video, start, duration)
+      await convertToGif(video, start, duration)
+      setAppState("done")
     }
   }
 
@@ -27,8 +29,8 @@ export default function Interface({appState, setAppState, convertToGif, gifUrl}:
       { appState === "ready" ? 
                 <DropZoneInput setVideo={setVideo} setAppState={setAppState}/> : 
         (["details", "processing"].includes(appState) && video) ? 
-                <EditDetails video={video} appState={appState} setAppState={setAppState} convert={convert}/> : 
-        appState === "done" ?
+                <EditDetails video={video} setVideo={setVideo} appState={appState} setAppState={setAppState} convert={convert}/> : 
+        (appState === "done" && gifUrl) ?
                 <DownloadGif gifUrl={gifUrl}/> : <></>}
     </div>
   )

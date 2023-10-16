@@ -5,6 +5,7 @@ type DownloadGifProps = {
 export default function DownloadGif({}: DownloadGifProps) {
   return (
     <>
+    Download GIF
     </>
   )
 }
