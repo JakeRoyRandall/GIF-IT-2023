@@ -14,7 +14,7 @@ export default function App() {
   const ffmpegRef = useRef(new FFmpeg())
 
   const load = async () => {
-    const baseURL = "https://unpkg.com/@ffmpeg/core-mt@0.12.4/dist/esm"
+    const baseURL = "https://unpkg.com/@ffmpeg/core@0.12.4/dist/esm"
     const ffmpeg = ffmpegRef.current
     // toBlobURL is used to bypass CORS issue, urls with the same domain can be used directly.
     const coreURL = await toBlobURL(`${baseURL}/ffmpeg-core.js`, "text/javascript")
@@ -47,31 +47,23 @@ export default function App() {
     const ffmpeg = ffmpegRef.current
     try {
       setAppState("processing")
-      
-      // Write the file to memory (to a file name unlikely to be in memory)
       const rand = Math.floor(Math.random() * 1000000)
       const randName = `${rand}.mp4`
-      console.log(randName)
       await ffmpeg.writeFile(randName, await fetchFile(video))
-      console.log("file written")
+
       await ffmpeg.exec(
         [ '-ss', `${start}`, 
-        // where we want the gif to start relative to the input
-        '-t', `${duration}`, 
-        // the duration to read from the input
-        '-i', randName,
-        // sets the input to the file created previously
+          '-t', `${duration}`, 
+          '-i', randName,
+          '-vf', 'fps=10,scale=320:-1:flags=lanczos', '-c:v', 'gif',
+          // '-f', 'gif', 
+          `${video.name}.gif`])
         // '-filter_complex','[0:v] fps=12,scale=480:-1,split [a][bx[a] palettegen [p][b][p] paletteuse',
-        '-f', 'gif', `${video.name}.gif`])
-        console.log("exec done")
-        // sets the output desitantion of the previous set of commands
         // $ ffmpeg -ss 61.0 -t 2.5 -i StickAround.mp4 -i palette.png -filter_complex "[0:v][1:v] paletteuse" prettyStickAround.gif
         // -filter_complex "[0:v] fps=12,scale=w=480:h=-1,split [a][b][a] palettegen=stats_mode=single [p][b][p] paletteuse=new=1" StickAroundPerFrame.gif
         const data = await ffmpeg.readFile(`${video.name}.gif`)
-        console.log("done with data")
         // @ts-ignore
         const url = URL.createObjectURL(new Blob([data.buffer], { type: 'image/gif' }))
-        console.log(url)
         setGifUrl(url)
         setAppState("done")
     } catch {

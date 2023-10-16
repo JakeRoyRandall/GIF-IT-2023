@@ -24,14 +24,16 @@ export default function Interface({appState, setAppState, convertToGif, gifUrl}:
     }
   }
 
+  const startOver = () => {setVideo(null); setAppState("ready")}
+
   return (
-    <div id="interface" className="flex justify-center items-center h-screen w-screen z-10">
+    <div id="interface" className="flex justify-center items-center h-[calc(100vh-56px)] w-screen z-10">
       { appState === "ready" ? 
                 <DropZoneInput setVideo={setVideo} setAppState={setAppState}/> : 
         (["details", "processing"].includes(appState) && video) ? 
-                <EditDetails video={video} setVideo={setVideo} appState={appState} setAppState={setAppState} convert={convert}/> : 
+                <EditDetails video={video} startOver={startOver} appState={appState} convert={convert}/> : 
         (appState === "done" && gifUrl) ?
-                <DownloadGif gifUrl={gifUrl}/> : <></>}
+                <DownloadGif fileName={video?.name} gifUrl={gifUrl} startOver={startOver}/> : <></>}
     </div>
   )
 }
