@@ -39,11 +39,11 @@ export default function EditDetails({video, startOver, convert}: EditDetailsProp
             <h4>Start : {start} seconds &nbsp;&nbsp;&nbsp; Duration: {gifDur} seconds</h4>
       </div>
 
-      <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20">
-          <button onClick={() => startOver()} className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150">
+      <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20 font-black">
+          <button onClick={() => startOver()} className="h-14 w-44 rounded-full m-6 font-poppins bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150">
             START OVER
           </button>
-          <button className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" 
+          <button className="h-14 w-44 rounded-full m-6 font-poppins bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" 
                   onClick={() => {convert(start, gifDur)}}>
             GIF-IT!
           </button>

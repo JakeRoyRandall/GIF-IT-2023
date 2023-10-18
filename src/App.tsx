@@ -72,7 +72,7 @@ export default function App() {
   }
 
   return (
-    <div id="app" className="h-screen w-screen flex flex-col overflow-hidden">
+    <div id="app" className="h-screen w-screen flex flex-col overflow-hidden font-poppins">
       <Background winDims={winDims}/>
       <GifBackground appState={appState} winDims={winDims}/>
       <Interface appState={appState} setAppState={setAppState} convertToGif={convertToGif} gifUrl={gifUrl}/>

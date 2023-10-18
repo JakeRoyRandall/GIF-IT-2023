@@ -76,10 +76,10 @@ export default function Background({winDims}: {winDims: WindowDimensions}) {
   return (
     <div id="ShapeBackground" className="absolute h-screen w-screen overflow-hidden">
       <div className="flex justify-center items-center absolute h-[calc(50vh-56px)] w-screen">
-        <h1 className="text-8xl">GIF-IT!</h1>
+        <h1 className="text-8xl font-black font-poppins">GIF-IT!</h1>
       </div>
       <div className="absolute bottom-0 h-14 w-screen flex justify-center items-center bg-black">
-          <a className="text-white hover:text-[#FFD464]" href="http://jakerandall.me">Made by your good friend Jake</a>
+          <a className="font-poppins font-bold text-white hover:text-[#FFD464]" href="http://jakerandall.me">Made by your good friend Jake</a>
       </div>
       {shapeData.map((shape, index) => ( 
         <img key={shape.name} src={shape.src} className="absolute" alt={shape.name} style={shapeStyles[index]} /> 

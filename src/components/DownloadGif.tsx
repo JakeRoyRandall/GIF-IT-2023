@@ -12,12 +12,12 @@ export default function DownloadGif({fileName ="your_new_gif", gifUrl, startOver
       </div>
       <div id="emptyContainer" className="flex w-100 h-20"></div>
 
-      <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20">
-          <button onClick={() => startOver()} className="h-14 w-44 rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150">
+      <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20 font-black">
+          <button onClick={() => startOver()} className="h-14 w-44 rounded-full m-6 font-poppins bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150">
             START OVER
           </button>
           <a href={gifUrl} download={`${fileName}.gif`} className="">
-            <div className="h-14 w-44 flex justify-center items-center rounded-full m-6 font-poppins font-semibold bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" >
+            <div className="h-14 w-44 flex justify-center items-center rounded-full m-6 font-poppins bg-button shadow-button hover:bg-button-hover hover:shadow-hover active:bg-button-active active:shadow-none transform active:translate-y-1 transition duration-150" >
               DOWNLOAD
             </div>
           </a>
