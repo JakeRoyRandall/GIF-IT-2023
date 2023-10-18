@@ -21,7 +21,7 @@ export default function App() {
     const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm")
     const workerURL = await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, "text/javascript")
     await ffmpeg.load({ coreURL, wasmURL, workerURL })
-    setAppState("error")
+    setAppState("ready")
   }
 
   useEffect(() => {load()}, [])
