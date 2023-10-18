@@ -66,7 +66,7 @@ export default function DropZoneInput({setVideo, setAppState}:DropZoneInputProps
     }, [inputRef])
 
     return (
-        <div ref={inputRef} className={`w-96 h-60 rounded-3xl ${drag ? "bg-gradient-to-bl from-[#FFAE5A] from-4.25% via-[#DA38B9] via-46%% to-[#5E489F] to-94.84%%" : "border-black border-4 border-dashed"}`}>
+        <div ref={inputRef} className={`hidden sm:flex w-96 h-60 rounded-3xl ${drag ? "bg-gradient-to-bl from-[#FFAE5A] from-4.25% via-[#DA38B9] via-46%% to-[#5E489F] to-94.84%%" : "border-black border-4 border-dashed"}`}>
           <input type="file" name="fileInput" id="fileInput" className="overflow-hidden opacity-0 -z-100 hidden" onChange={e => e.target.files && handleFile(e.target.files[0])}/>
           <label htmlFor="fileInput" className={`flex flex-col justify-center items-center w-full h-full cursor-pointer ${drag && "text-white"}`}>
               <img src={`${drag ? uploadArrowWhite : uploadArrowBlack}`} alt="Upload Arrow"/><br/>

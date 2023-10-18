@@ -37,8 +37,8 @@ const shapeData = [
   { name: "blue sphere",      src: blue_sphere,       x: 1130,  y: 760 },
   { name: "pink tube",        src: pink_tube,         x: 1220,  y: 960 },
   { name: "blue pyramid",     src: blue_pyramid,      x: 510,   y: 930 },
-  { name: "yellow cube",      src: yellow_cube,       x: 190,   y: 970 },
   { name: "large blue sphere",src: blue_sphere_large, x: 20,    y: 830 },
+  { name: "yellow cube",      src: yellow_cube,       x: 190,   y: 970 },
 ]
 
 const confettiData = [
@@ -66,7 +66,7 @@ export default function Background({winDims}: {winDims: WindowDimensions}) {
   const positionThing = (x: number, y: number) => {
     const newX = (x / baseWidth) * winDims.width
     const newY = (y / baseHeight) * winDims.height
-    return { transform: `translate(-50%, -50%) translate(${newX}px, ${newY}px)`, }
+    return { transform: `translate(-50%, -50%) translate(${newX}px, ${newY}px) ${winDims.width < 1000 ? "scale(75%)" : "scale(100%)"}` }
   }
   
   const shapeStyles = useMemo(() => shapeData.map(shape => positionThing(shape.x, shape.y)), [winDims, shapeData]);
@@ -76,16 +76,16 @@ export default function Background({winDims}: {winDims: WindowDimensions}) {
   return (
     <div id="ShapeBackground" className="absolute h-screen w-screen overflow-hidden">
       <div className="flex justify-center items-center absolute h-[calc(50vh-56px)] w-screen">
-        <h1 className="text-8xl font-black font-poppins">GIF-IT!</h1>
+        <h1 className="text-6xl sm:text-8xl font-black font-poppins z-20">GIF-IT!</h1>
       </div>
-      <div className="absolute bottom-0 h-14 w-screen flex justify-center items-center bg-black">
-          <a className="font-poppins font-bold text-white hover:text-[#FFD464]" href="http://jakerandall.me">Made by your good friend Jake</a>
+      <div className="absolute bottom-0 h-14 w-screen flex justify-center items-center bg-black cursor-pointer">
+          <a className="font-poppins font-bold text-white hover:text-[#FFD464] z-20" href="http://jakerandall.me">Made by your good friend Jake</a>
       </div>
-      {shapeData.map((shape, index) => ( 
-        <img key={shape.name} src={shape.src} className="absolute" alt={shape.name} style={shapeStyles[index]} /> 
-      ))}
       {confettiData.map((confetti, index) => ( 
-        <img key={confetti.name} src={confetti.src} className="absolute" alt={confetti.name} style={confettiStyles[index]} /> 
+        <img key={confetti.name} src={confetti.src} className="absolute md:scale-100" alt={confetti.name} style={confettiStyles[index]} /> 
+      ))}
+      {shapeData.map((shape, index) => ( 
+        <img key={shape.name} src={shape.src} className="absolute hidden sm:flex" alt={shape.name} style={shapeStyles[index]} /> 
       ))}
     </div>
   )

@@ -21,20 +21,24 @@ export default function App() {
     const wasmURL = await toBlobURL(`${baseURL}/ffmpeg-core.wasm`, "application/wasm")
     const workerURL = await toBlobURL(`${baseURL}/ffmpeg-core.worker.js`, "text/javascript")
     await ffmpeg.load({ coreURL, wasmURL, workerURL })
-    setAppState("ready")
+    setAppState("error")
   }
 
   useEffect(() => {load()}, [])
 
-  function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number): (...args: Parameters<F>) => void {
-    let timeout: ReturnType<typeof setTimeout> | null = null
-    return (...args: Parameters<F>): void => {
-      if (timeout !== null) { clearTimeout(timeout) }
-      timeout = setTimeout(() => func(...args), waitFor)
-    }
-  }
+  // debounce is not needed from some testing
 
-  const handleResize = debounce(() => { setWinDims({ height: window.innerHeight, width: window.innerWidth }) }, 250)
+  // function debounce<F extends (...args: any[]) => any>(func: F, waitFor: number): (...args: Parameters<F>) => void {
+  //   let timeout: ReturnType<typeof setTimeout> | null = null
+  //   return (...args: Parameters<F>): void => {
+  //     if (timeout !== null) { clearTimeout(timeout) }
+  //     timeout = setTimeout(() => func(...args), waitFor)
+  //   }
+  // }
+
+  // const handleResize = debounce(() => { setWinDims({ height: window.innerHeight, width: window.innerWidth }) }, 250)
+  const handleResize = () => { setWinDims({ height: window.innerHeight, width: window.innerWidth }) }
+
 
   useEffect(() => {
     window.addEventListener('resize', handleResize)

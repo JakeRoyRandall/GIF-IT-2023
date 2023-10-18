@@ -1,7 +1,9 @@
 import { useState } from 'react'
+import ErrorScreen from "./ErrorScreen"
 import DropZoneInput from "./DropZoneInput"
 import EditDetails from "./EditDetails"
 import DownloadGif from "./DownloadGif"
+import crying from "../assets/gifs/crying/crying_1.gif"
 
 type AppState = "error" | "loading" | "ready" | "details" | "processing" | "done"
 
@@ -28,7 +30,14 @@ export default function Interface({appState, setAppState, convertToGif, gifUrl}:
 
   return (
     <div id="interface" className="flex justify-center items-center h-[calc(100vh-56px)] w-screen z-10">
-      { appState === "ready" ? 
+      <div className="flex flex-col sm:hidden justify-center items-center w-96 m-8 mt-16">
+        <img src={crying} className="rounded-3xl my-8" alt="crying baby gif"/>
+        <div className="font-bold text-red-500">Sorry, GIT-IT is intended for desktop use only</div>
+      </div>
+
+      { ["error", "loading"].includes(appState) ? 
+                <ErrorScreen error="sorry" startOver={startOver}/> : 
+        appState === "ready" ? 
                 <DropZoneInput setVideo={setVideo} setAppState={setAppState}/> : 
         (["details", "processing"].includes(appState) && video) ? 
                 <EditDetails video={video} startOver={startOver} appState={appState} convert={convert}/> : 

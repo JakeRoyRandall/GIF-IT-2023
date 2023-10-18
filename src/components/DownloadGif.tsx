@@ -6,7 +6,7 @@ type DownloadGifProps = {
 
 export default function DownloadGif({fileName ="your_new_gif", gifUrl, startOver}: DownloadGifProps) {
   return (
-    <div id="DownloadGifContainer" className="w-100 h-100">
+    <div id="DownloadGifContainer" className="hidden sm:flex w-100 h-100">
       <div id="GifContainer" className="flex justify-center items-start w-100 h-60 rounded-3xl">
         <img src={gifUrl} className="max-h-60" alt="your new gif"/>
       </div>
