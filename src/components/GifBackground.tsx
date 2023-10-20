@@ -62,16 +62,16 @@ type Gif = { name: string, frame: string, src: string, w: number, h: number, x: 
 export default function GifBackground({appState, winDims}: GifBackgroundProps) {
   // not in top left, top right, bottom right, bottom left order
   const waitingGifsData = [
-    { name: "waiting 4", src: waiting_4, w: 300, h: 300, x: (winDims.width / 2 + 75), y: (winDims.height / 2), rotation: 0  },
-    { name: "waiting 5", src: waiting_5, w: 180, h: 140, x: 300, y: 150, rotation: 9  },
-    { name: "waiting 1", src: waiting_1, w: 160, h: 160, x: 842, y: 820, rotation: -4 },
-    { name: "waiting 2", src: waiting_2, w: 250, h: 150, x: 1150, y: 480, rotation: 2  },
-    { name: "waiting 3", src: waiting_3, w: 120, h: 180, x: 270, y: 488, rotation: -5 },
-    { name: "waiting 7", src: waiting_7, w: 100, h: 100, x: 350, y: 568, rotation: -4  },
-    { name: "waiting 6", src: waiting_6, w: 260, h: 100, x: 345, y: 740, rotation: 0  },
-    { name: "waiting 9", src: waiting_9, w: 160, h: 130, x: 750, y: 60, rotation: -12  },
-    { name: "waiting 8", src: waiting_8, w: 180, h: 150, x: 1140, y: 220, rotation: -7  },
-    { name: "waiting 10", src: waiting_10, w: 120, h: 100, x: 1140, y: 740, rotation: -4  },
+    { name: "waiting 4", frame: "", src: waiting_4, w: 300, h: 300, x: (winDims.width / 2 + 75), y: (winDims.height / 2), rotation: 0  },
+    { name: "waiting 5", frame: "", src: waiting_5, w: 180, h: 140, x: 300, y: 150, rotation: 9  },
+    { name: "waiting 1", frame: "", src: waiting_1, w: 160, h: 160, x: 842, y: 820, rotation: -4 },
+    { name: "waiting 2", frame: "", src: waiting_2, w: 250, h: 150, x: 1150, y: 480, rotation: 2  },
+    { name: "waiting 3", frame: "", src: waiting_3, w: 120, h: 180, x: 270, y: 488, rotation: -5 },
+    { name: "waiting 7", frame: "", src: waiting_7, w: 100, h: 100, x: 350, y: 568, rotation: -4  },
+    { name: "waiting 6", frame: "", src: waiting_6, w: 260, h: 100, x: 345, y: 740, rotation: 0  },
+    { name: "waiting 9", frame: "", src: waiting_9, w: 160, h: 130, x: 750, y: 60, rotation: -12  },
+    { name: "waiting 8", frame: "", src: waiting_8, w: 180, h: 150, x: 1140, y: 220, rotation: -7  },
+    { name: "waiting 10", frame: "", src: waiting_10, w: 120, h: 100, x: 1140, y: 740, rotation: -4  },
   ]
   
   const pointingGifsData = [
@@ -87,29 +87,29 @@ export default function GifBackground({appState, winDims}: GifBackgroundProps) {
   ]
   
   const thinkingGifsData = [
-    { name: "thinking 1", src: thinking_1, w: 156, h: 118, x: 730, y: 66, rotation: -8.5 },
-    { name: "thinking 2", src: thinking_2, w: 164, h: 132, x: 1040, y: 240, rotation: -10  },
-    { name: "thinking 3", src: thinking_3, w: 188, h: 94, x: 1140, y: 440, rotation: 5 },
-    { name: "thinking 4", src: thinking_4, w: 268, h: 150, x: 1110, y: 620, rotation: 10  },
-    { name: "thinking 5", src: thinking_5, w: 148, h: 148, x: 900, y: 890, rotation: 13  },
-    { name: "thinking 6", src: thinking_6, w: 200, h: 120, x: 410, y: 910, rotation: -9  },
-    { name: "thinking 9", src: thinking_9, w: 160, h: 96, x: 200, y: 460, rotation: -14  },
-    { name: "thinking 8", src: thinking_8, w: 216, h: 190, x: 320, y: 560, rotation: -7  },
-    { name: "thinking 7", src: thinking_7, w: 180, h: 110, x: 270, y: 700, rotation: -21  },
-    { name: "thinking 10", src: thinking_10, w: 250, h: 114, x:330, y: 180, rotation: 9  }
+    { name: "thinking 1", frame: "", src: thinking_1, w: 156, h: 118, x: 730, y: 66, rotation: -8.5 },
+    { name: "thinking 2", frame: "", src: thinking_2, w: 164, h: 132, x: 1040, y: 240, rotation: -10  },
+    { name: "thinking 3", frame: "", src: thinking_3, w: 188, h: 94, x: 1140, y: 440, rotation: 5 },
+    { name: "thinking 4", frame: "", src: thinking_4, w: 268, h: 150, x: 1110, y: 620, rotation: 10  },
+    { name: "thinking 5", frame: "", src: thinking_5, w: 148, h: 148, x: 900, y: 890, rotation: 13  },
+    { name: "thinking 6", frame: "", src: thinking_6, w: 200, h: 120, x: 410, y: 910, rotation: -9  },
+    { name: "thinking 9", frame: "", src: thinking_9, w: 160, h: 96, x: 200, y: 460, rotation: -14  },
+    { name: "thinking 8", frame: "", src: thinking_8, w: 216, h: 190, x: 320, y: 560, rotation: -7  },
+    { name: "thinking 7", frame: "", src: thinking_7, w: 180, h: 110, x: 270, y: 700, rotation: -21  },
+    { name: "thinking 10", frame: "", src: thinking_10, w: 250, h: 114, x:330, y: 180, rotation: 9  }
   ]
   
   const clappingGifsData = [
-    { name: "clapping 1", src: clapping_1, w: 180, h: 180, x: 734, y: 60, rotation: -4 },
-    { name: "clapping 2", src: clapping_2, w: 180, h: 140, x: 1060, y: 234, rotation: -12  },
-    { name: "clapping 3", src: clapping_3, w: 212, h: 228, x: 1174, y: 528, rotation: 4 },
-    { name: "clapping 4", src: clapping_4, w: 104, h: 136, x: 1060, y: 628, rotation: 0  },
-    { name: "clapping 5", src: clapping_5, w: 130, h: 130, x: 910, y: 870, rotation: 9  },
-    { name: "clapping 6", src: clapping_6, w: 200, h: 132, x: 500, y: 928, rotation: 14  },
-    { name: "clapping 7", src: clapping_7, w: 160, h: 160, x: 260, y: 720, rotation: -4  },
-    { name: "clapping 9", src: clapping_9, w: 162, h: 144, x: 330, y: 440, rotation: -12  },
-    { name: "clapping 8", src: clapping_8, w: 145, h: 70, x: 250, y: 500, rotation: 13  },
-    { name: "clapping 10", src: clapping_10, w: 200, h: 150, x: 340, y: 160, rotation: 13  }
+    { name: "clapping 1", frame: "", src: clapping_1, w: 180, h: 180, x: 734, y: 60, rotation: -4 },
+    { name: "clapping 2", frame: "", src: clapping_2, w: 180, h: 140, x: 1060, y: 234, rotation: -12  },
+    { name: "clapping 3", frame: "", src: clapping_3, w: 212, h: 228, x: 1174, y: 528, rotation: 4 },
+    { name: "clapping 4", frame: "", src: clapping_4, w: 104, h: 136, x: 1060, y: 628, rotation: 0  },
+    { name: "clapping 5", frame: "", src: clapping_5, w: 130, h: 130, x: 910, y: 870, rotation: 9  },
+    { name: "clapping 6", frame: "", src: clapping_6, w: 200, h: 132, x: 500, y: 928, rotation: 14  },
+    { name: "clapping 7", frame: "", src: clapping_7, w: 160, h: 160, x: 260, y: 720, rotation: -4  },
+    { name: "clapping 9", frame: "", src: clapping_9, w: 162, h: 144, x: 330, y: 440, rotation: -12  },
+    { name: "clapping 8", frame: "", src: clapping_8, w: 145, h: 70, x: 250, y: 500, rotation: 13  },
+    { name: "clapping 10", frame: "", src: clapping_10, w: 200, h: 150, x: 340, y: 160, rotation: 13  }
   ]
   
   const gifsData = [...waitingGifsData, ...pointingGifsData, ...thinkingGifsData, ...clappingGifsData]
