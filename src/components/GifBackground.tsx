@@ -1,4 +1,4 @@
-import { useMemo } from 'react'
+import { useState, useMemo } from 'react'
 
 // in top left, top right, bottom right, bottom left order
 import waiting_1 from '../assets/gifs/waiting/waiting_1.gif'
@@ -12,15 +12,25 @@ import waiting_8 from '../assets/gifs/waiting/waiting_8.gif'
 import waiting_9 from '../assets/gifs/waiting/waiting_9.gif'
 import waiting_10 from '../assets/gifs/waiting/waiting_10.gif'
 
-import pointing_1 from '../assets/gifs/pointing/pointing_1.gif'
-import pointing_2 from '../assets/gifs/pointing/pointing_2.gif'
-import pointing_3 from '../assets/gifs/pointing/pointing_3.gif'
-import pointing_4 from '../assets/gifs/pointing/pointing_4.gif'
-import pointing_5 from '../assets/gifs/pointing/pointing_5.gif'
-import pointing_6 from '../assets/gifs/pointing/pointing_6.gif'
-import pointing_7 from '../assets/gifs/pointing/pointing_7.gif'
-import pointing_8 from '../assets/gifs/pointing/pointing_8.gif'
-import pointing_9 from '../assets/gifs/pointing/pointing_9.gif'
+import pointing_1 from '../assets/gifs/pointing/pointing_1.webp'
+import pointing_2 from '../assets/gifs/pointing/pointing_2.webp'
+import pointing_3 from '../assets/gifs/pointing/pointing_3.webp'
+import pointing_4 from '../assets/gifs/pointing/pointing_4.webp'
+import pointing_5 from '../assets/gifs/pointing/pointing_5.webp'
+import pointing_6 from '../assets/gifs/pointing/pointing_6.webp'
+import pointing_7 from '../assets/gifs/pointing/pointing_7.webp'
+import pointing_8 from '../assets/gifs/pointing/pointing_8.webp'
+import pointing_9 from '../assets/gifs/pointing/pointing_9.webp'
+
+import pointing_1_frame from '../assets/gifs/pointing/pointing_1_frame.webp'
+import pointing_2_frame from '../assets/gifs/pointing/pointing_2_frame.webp'
+import pointing_3_frame from '../assets/gifs/pointing/pointing_3_frame.webp'
+import pointing_4_frame from '../assets/gifs/pointing/pointing_4_frame.webp'
+import pointing_5_frame from '../assets/gifs/pointing/pointing_5_frame.webp'
+import pointing_6_frame from '../assets/gifs/pointing/pointing_6_frame.webp'
+import pointing_7_frame from '../assets/gifs/pointing/pointing_7_frame.webp'
+import pointing_8_frame from '../assets/gifs/pointing/pointing_8_frame.webp'
+import pointing_9_frame from '../assets/gifs/pointing/pointing_9_frame.webp'
 
 import thinking_1 from '../assets/gifs/thinking/thinking_1.gif'
 import thinking_2 from '../assets/gifs/thinking/thinking_2.gif'
@@ -47,7 +57,7 @@ import clapping_10 from '../assets/gifs/clapping/clapping_10.gif'
 type AppState = "error" | "loading" | "ready" | "details" | "processing" | "done"
 type WindowDimensions = { height: number, width: number }
 type GifBackgroundProps = { appState: AppState, winDims: WindowDimensions }
-type Gif = { name: string, src: string, w: number, h: number, x: number, y: number, rotation: number }
+type Gif = { name: string, frame: string, src: string, w: number, h: number, x: number, y: number, rotation: number }
 
 export default function GifBackground({appState, winDims}: GifBackgroundProps) {
   // not in top left, top right, bottom right, bottom left order
@@ -65,15 +75,15 @@ export default function GifBackground({appState, winDims}: GifBackgroundProps) {
   ]
   
   const pointingGifsData = [
-    { name: "pointing 1", src: pointing_1, w: 146, h: 136, x: 700, y: 50, rotation: 6 },
-    { name: "pointing 3", src: pointing_3, w: 126, h: 124, x: 1208, y: 308, rotation: 10 },
-    { name: "pointing 2", src: pointing_2, w: 238, h: 134, x: 1100, y: 204, rotation: -13  },
-    { name: "pointing 4", src: pointing_4, w: 240, h: 170, x: 1170, y: 578, rotation: 8  },
-    { name: "pointing 5", src: pointing_5, w: 260, h: 160, x: 810, y: 790, rotation: -6.5  },
-    { name: "pointing 7", src: pointing_7, w: 224, h: 156, x: 280, y: 700, rotation: -16  },
-    { name: "pointing 6", src: pointing_6, w: 112, h: 112, x: 410, y: 770, rotation: -3.5  },
-    { name: "pointing 8", src: pointing_8, w: 198, h: 132, x: 270, y: 450, rotation: -3  },
-    { name: "pointing 9", src: pointing_9, w: 244, h: 166, x: 320, y: 170, rotation: 9  }
+    { name: "pointing 1", frame: pointing_1_frame, src: pointing_1, w: 146, h: 136, x: 700, y: 50, rotation: 6 },
+    { name: "pointing 3", frame: pointing_3_frame, src: pointing_3, w: 126, h: 124, x: 1208, y: 308, rotation: 10 },
+    { name: "pointing 2", frame: pointing_2_frame, src: pointing_2, w: 238, h: 134, x: 1100, y: 204, rotation: -13  },
+    { name: "pointing 4", frame: pointing_4_frame, src: pointing_4, w: 240, h: 170, x: 1170, y: 578, rotation: 8  },
+    { name: "pointing 5", frame: pointing_5_frame, src: pointing_5, w: 260, h: 160, x: 810, y: 790, rotation: -6.5  },
+    { name: "pointing 7", frame: pointing_7_frame, src: pointing_7, w: 224, h: 156, x: 280, y: 700, rotation: -16  },
+    { name: "pointing 6", frame: pointing_6_frame, src: pointing_6, w: 112, h: 112, x: 410, y: 770, rotation: -3.5  },
+    { name: "pointing 8", frame: pointing_8_frame, src: pointing_8, w: 198, h: 132, x: 270, y: 450, rotation: -3  },
+    { name: "pointing 9", frame: pointing_9_frame, src: pointing_9, w: 244, h: 166, x: 320, y: 170, rotation: 9  }
   ]
   
   const thinkingGifsData = [
@@ -119,10 +129,24 @@ export default function GifBackground({appState, winDims}: GifBackgroundProps) {
 
   return (
     <div id="GifBackground" className="hidden sm:flex absolute h-screen w-screen overflow-hidden">
-      { (appState === "loading" || appState === "processing") && waitingGifsData.map((gif, index) => <img key={gif.name} src={gif.src} className="absolute object-cover" alt={gif.name} style={gifStyles[index]}/>)}
-      { appState === "ready" && pointingGifsData.map((gif, index) => <img key={gif.name} src={gif.src} className="absolute object-cover" alt={gif.name} style={gifStyles[index + 10]}/> )}
+      { appState === "ready" && pointingGifsData.map((gif, index) => <ImageContainer gif={gif} style={gifStyles[index + 10]} /> )}
       { appState === "details" && thinkingGifsData.map((gif, index) => <img key={gif.name} src={gif.src} className="absolute object-cover" alt={gif.name} style={gifStyles[index + 19]}/>)}
+      { appState === "processing" && waitingGifsData.map((gif, index) => <img key={gif.name} src={gif.src} className="absolute object-cover" alt={gif.name} style={gifStyles[index]}/>)}
       { appState === "done" && clappingGifsData.map((gif, index) => <img key={gif.name} src={gif.src} className="absolute object-cover" alt={gif.name} style={gifStyles[index + 29]}/>)}
+    </div>
+  )
+}
+
+function ImageContainer({gif, style}: {gif: Gif, style: any}) {
+  const [imageLoaded, setImageLoaded] = useState(false);
+  return (
+    <div key={gif.name} className="absolute object-cover" style={style}>
+      <img  src={gif.frame} alt="gif placeholder"
+            style={{ display: imageLoaded ? 'none' : 'block' }}
+      />
+      <img  src={gif.src} alt={gif.name} onLoad={() => setImageLoaded(true)} 
+            style={{ display: imageLoaded ? 'block' : 'none' }}
+      />
     </div>
   )
 }
