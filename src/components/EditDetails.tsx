@@ -30,13 +30,15 @@ export default function EditDetails({video, startOver, convert}: EditDetailsProp
             src={useMemo(() => URL.createObjectURL(video), [video])}
             onLoadedMetadata={(e: React.SyntheticEvent<HTMLVideoElement, Event>) => {
               const vid = e.target as HTMLVideoElement; 
-              setVidDur(Number(vid.duration.toFixed(2)))
+              const dur = Number(vid.duration.toFixed(2))
+              setVidDur(dur)
+              if (dur < gifDur) setGifDur(dur)
             }}
         />
       </div>
       <div id="SliderContainer" className="flex flex-col justify-around items-center w-100 h-20">
           <Slider className="w-100 text-black" dots={true} range min={0} max={vidDur} onChange={(e) => updateState(e)} allowCross={false} defaultValue={[0, 6]} step={0.01}/>
-            <h4>Start : {start} seconds &nbsp;&nbsp;&nbsp; Duration: {gifDur} seconds</h4>
+            <h4>Start : {start} seconds &nbsp;&nbsp;&nbsp; Duration: {vidDur} seconds</h4>
       </div>
 
       <div id="ButtonsContainer" className="flex justify-around items-center w-100 h-20 font-black">
