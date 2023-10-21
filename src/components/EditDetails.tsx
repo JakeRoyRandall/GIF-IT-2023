@@ -23,7 +23,7 @@ export default function EditDetails({video, startOver, convert}: EditDetailsProp
   }
 
   return (
-    <div id="EditDetails" className="hidden sm:flex w-100 h-100">
+    <div id="EditDetails" className="hidden sm:flex flex-col w-100 h-100">
       <div id="VideoContainer" className="flex justify-center items-start w-100 h-60 rounded-3xl">
         <video 
             controls className="max-h-60"

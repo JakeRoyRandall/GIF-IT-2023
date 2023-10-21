@@ -19,7 +19,6 @@ export default function Interface({appState, setAppState, convertToGif, gifUrl}:
   const [video, setVideo] = useState<File | null>(null)
   
   const convert = async (start: number, duration: number) => {
-    console.log("converting")
     if (video) {
       await convertToGif(video, start, duration)
       setAppState("done")
@@ -35,11 +34,11 @@ export default function Interface({appState, setAppState, convertToGif, gifUrl}:
         <div className="font-bold text-red-500">Sorry, GIT-IT is intended for desktop use only</div>
       </div>
 
-      { ["error", "loading"].includes(appState) ? 
+      { appState === "error" ? 
                 <ErrorScreen error="sorry" startOver={startOver}/> : 
-        appState === "ready" ? 
-                <DropZoneInput setVideo={setVideo} setAppState={setAppState}/> : 
-        (["details", "processing"].includes(appState) && video) ? 
+        ["ready", "loading"].includes(appState) ? 
+                <DropZoneInput setVideo={setVideo} appState={appState} setAppState={setAppState}/> : 
+        (appState === "details" && video) ? 
                 <EditDetails video={video} startOver={startOver} appState={appState} convert={convert}/> : 
         (appState === "done" && gifUrl) ?
                 <DownloadGif fileName={video?.name} gifUrl={gifUrl} startOver={startOver}/> : <></>}

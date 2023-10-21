@@ -6,10 +6,11 @@ type AppState = "error" | "loading" | "ready" | "details" | "processing" | "done
 
 type DropZoneInputProps = {
   setVideo: (file: File) => void,
+  appState: AppState,
   setAppState: (state: AppState) => void,
 }
 
-export default function DropZoneInput({setVideo, setAppState}:DropZoneInputProps) {
+export default function DropZoneInput({setVideo, appState, setAppState}:DropZoneInputProps) {
   const inputRef = useRef<HTMLDivElement | null>(null)
   const [drag, setDrag] = useState(false)
 
@@ -69,11 +70,21 @@ export default function DropZoneInput({setVideo, setAppState}:DropZoneInputProps
         <div ref={inputRef} className={`hidden sm:flex w-96 h-60 rounded-3xl ${drag ? "bg-gradient-to-bl from-[#FFAE5A] from-4.25% via-[#DA38B9] via-46%% to-[#5E489F] to-94.84%%" : "border-black border-4 border-dashed"}`}>
           <input type="file" name="fileInput" id="fileInput" className="overflow-hidden opacity-0 -z-100 hidden" onChange={e => e.target.files && handleFile(e.target.files[0])}/>
           <label htmlFor="fileInput" className={`flex flex-col justify-center items-center w-full h-full cursor-pointer ${drag && "text-white"}`}>
-              <img src={`${drag ? uploadArrowWhite : uploadArrowBlack}`} alt="Upload Arrow"/><br/>
-              <span className={`text-lg ${drag? "text-white": ""}`}>Drop your video here or&nbsp;
-                <span className={`${!drag && "underline decoration-[#DA38B9] underline-offset-2 font-semibold text-transparent bg-clip-text bg-gradient-to-b from-[#FFAE5A] via-[#DA38B9] to-[#5E489F]"}`}>browse</span>
-              </span>
-              <span className={`text-sm ${drag? "text-white": ""}`}>Please upload a GIF, MP4, or MOV</span>
+          <img src={`${drag ? uploadArrowWhite : uploadArrowBlack}`} alt="Upload Arrow"/><br/>
+            {appState === "ready" ? 
+              <>
+                <span className={`text-lg ${drag? "text-white": ""}`}>Drop your video here or&nbsp;
+                  <span className={`${!drag && "underline decoration-[#DA38B9] underline-offset-2 font-semibold text-transparent bg-clip-text bg-gradient-to-b from-[#FFAE5A] via-[#DA38B9] to-[#5E489F]"}`}>browse</span>
+                </span>
+                <span className={`text-sm ${drag? "text-white": ""}`}>Please upload a GIF, MP4, or MOV</span>
+              </> :
+              <>
+                <span className="text-lg">
+                  Hold on, GIF-IT is currently loading...
+                </span>
+                <span className="text-sm">Awkward! This usually only takes a second.</span>
+              </>
+            }
           </label>
         </div>
     )
