@@ -134,3 +134,51 @@
 body {
   font-family: "Poppins", sans-serif;
 }
+
+.rc-slider-rail {
+  height: inherit;
+  border-radius: 0px;
+}
+
+.rc-slider-track {
+  height: 16px;
+  border-radius: 0px;
+  background: linear-gradient(251.3deg, #FFAE5A 4.25%, #DA38B9 46%, #5E489F 94.84%);
+}
+
+.rc-slider-step {
+
+}
+
+.rc-slider-handle {
+    position: absolute;
+    width: 31px;
+    height: 43px;
+    margin-top: -27px;
+    cursor: pointer;
+    cursor: -webkit-grab;
+    cursor: grab;
+    background-image: url("./assets/DurationDrag.png");
+    touch-action: pan-x;
+    border: none !important;
+    border-radius: 0px;
+    background-color: transparent;
+}
+
+.rc-slider-handle:hover {
+    border: none;
+    outline: none;
+}
+.rc-slider-handle:focus {
+    border: none;
+    outline: none;
+}
+.rc-slider-handle-dragging {
+    border: none;
+    outline: none;
+}
+
+.rc-slider-handle-dragging {
+    border: none;
+    outline: none;
+}

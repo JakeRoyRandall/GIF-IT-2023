@@ -37,7 +37,7 @@ export default function EditDetails({video, startOver, convert}: EditDetailsProp
         />
       </div>
       <div id="SliderContainer" className="flex flex-col justify-around items-center w-100 h-20">
-          <Slider className="w-100 text-black" dots={true} range min={0} max={vidDur} onChange={(e) => updateState(e)} allowCross={false} defaultValue={[0, 6]} step={0.01}/>
+          <Slider className="w-100 text-black h-4" dots={false} range min={0} max={vidDur} onChange={(e) => updateState(e)} allowCross={false} defaultValue={[0, 6]} step={0.01}/>
             <h4>Start : {start} seconds &nbsp;&nbsp;&nbsp; Duration: {vidDur} seconds</h4>
       </div>
 
